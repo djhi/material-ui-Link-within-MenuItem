@@ -2,7 +2,7 @@
   "name": "material-ui-link-within-menuitem",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://daxchen.github.io/material-ui-Link-within-MenuItem",
+  "homepage": "https://djhi.github.io/material-ui-Link-within-MenuItem",
   "devDependencies": {
     "gh-pages": "^0.12.0",
     "react-scripts": "0.9.0"
