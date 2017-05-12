@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
 import AppBar from 'material-ui/AppBar'
-import Drawer from 'material-ui/Drawer'
-import MenuItem from 'material-ui/MenuItem'
 import RaisedButton from 'material-ui/RaisedButton'
+import Sidebar from './Sidebar';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
 class App extends Component {
@@ -15,7 +13,9 @@ class App extends Component {
     }
   }
 
-  toggleDrawer = () => this.setState({ open: !this.state.open })
+  toggleDrawer = (open) => {
+      this.setState({ open: typeof open !== 'boolean' ? !this.state.open : open });
+  }
 
   render() {
       const items = [
@@ -33,43 +33,7 @@ class App extends Component {
           onLeftIconButtonTouchTap={this.toggleDrawer}
         />
 
-        <Drawer
-          docked={false}
-          width={300}
-          onRequestChange={this.toggleDrawer}
-          open={this.state.open}
-        >
-          <MenuItem
-            primaryText="home"
-            containerElement={<Link to="/" />}
-            leftIcon={<SettingsIcon />}
-            onTouchTap={() => {
-              console.log('going home')
-              this.toggleDrawer()
-            }}
-          />
-          <MenuItem
-            primaryText="about"
-            containerElement={<Link to="/about" />}
-            leftIcon={<SettingsIcon />}
-            onTouchTap={() => {
-              console.log('about')
-              this.toggleDrawer()
-            }}
-          />
-        {items.map(item => (
-            <MenuItem
-                key={item.name}
-                containerElement={<Link to={`/${item.path}`} />}
-                primaryText={item.name}
-                leftIcon={item.icon}
-              onTouchTap={() => {
-                console.log('about')
-                this.toggleDrawer()
-              }}
-            />
-        ))}
-        </Drawer>
+        <Sidebar open={this.state.open} toggleDrawer={this.toggleDrawer} items={items} />
 
         <div style={{ textAlign: 'center' }}>
           {this.props.children}
